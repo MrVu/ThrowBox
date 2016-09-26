@@ -39,25 +39,20 @@ def browse(path):
 	else:
 		folders,files=functions.ReadPath(path)
 
+		# Remove the hidden files and folders (hidden=beggining with ".")
+		folders=functions.RemoveHiddenObjects(folders)
+		files=functions.RemoveHiddenObjects(files)
+
+		# Sort the folders and files list.
+		folders.sort()
+		files.sort()
+
 	route=path.split("/")
 
 	return flask.render_template("browse.html",**locals())
 
 
 if __name__=="__main__":
-
-	# Check if ThrowBox is installed.
-	if not functions.Installed():
-		print("It seems like the throwbox isn't")
-		print("installed correctly.")
-		choice=input("Do you want to install now? (Y/N):")
-
-		if choice.lower()=="y":
-			functions.Install()
-			print("Installed.")
-		else:
-			print("OK, exiting.")
-			exit()
 
 	# Run The Debugging Server.
 	app.run(host="0.0.0.0", port=8080)

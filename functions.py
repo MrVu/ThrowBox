@@ -48,6 +48,17 @@ def RepoPath(path):
 
 	return FINAL_PATH
 
+
+def RemoveHiddenObjects(_list):
+	_list2=list() # List that contains only visible,
+				  # non-hidden objects.
+	for element in _list:
+		if element[0]!=".":
+			_list2.append(element)
+
+	return _list2
+
+
 def log(message, file="log.txt"):
 	"""A barebones function that logs messages."""
 	line="[{} >>> {}]\n\t{}\n\n".format(time.strftime("%d/%m/%Y"), time.strftime("%H:%M:%S"),message)
