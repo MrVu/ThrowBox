@@ -1,0 +1,15 @@
+[Unit]
+Description=ThrowBox gunicorn daemon
+After=network.target
+
+[Service]
+User=stjepan
+Group=stjepan
+WorkingDirectory=/ThrowBox
+
+ExecStart=/usr/local/bin/gunicorn --workers 4 --bind unix:/ThrowBox/ThrowBox.sock -m 664 wsgi:app
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s TERM $MAINPID
+
+[Install]
+WantedBy=multi-user.target

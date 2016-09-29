@@ -1,0 +1,28 @@
+#! /bin/sh
+# /etc/init.d/blah
+
+# PLACE IN /etc/init.d
+#sudo chmod 755 conffilename
+#sudo chown root:root conffilename
+
+
+# Carry out specific functions when asked to by the system
+case "$1" in
+  start)
+    echo "Starting up gunicorn ThrowBox workers..."
+    chdir /ThrowBox
+    exec nohup gunicorn --workers 4 --bind unix:/ThrowBox/ThrowBox.sock -m 664 wsgi:app &
+    echo "Done."
+    ;;
+  stop)
+    echo "Stoping  gunicorn ThrowBox workers..."
+    exec killall gunicorn
+    echo "Done."
+    ;;
+  *)
+    echo "Usage: {start|stop}"
+    exit 1
+    ;;
+esac
+
+exit 0

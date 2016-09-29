@@ -1,10 +1,25 @@
 import flask
 import os
 import time
+import configparser
 import functions
 
-
 app=flask.Flask(__name__)
+
+
+# Load the config file
+# Currently supported options:
+#	pagetitle
+#	username
+#	paragraph
+
+cp=configparser.ConfigParser()
+cp.read("throwbox.conf")
+for section in cp:
+	section_obj=cp[section]
+	app.config[section]=section_obj
+
+
 
 @app.route('/favicon.ico')
 def favicon():
