@@ -19,7 +19,7 @@ A simple file sharing platform, partly inspired by dropbox.
 
 ##Install
 
-ThrowBox has only **one dependency** that is not part of the default library - **Flask**.
+ThrowBox has only **one dependency** that is not a part of the default library - **Flask**.
 
 Before running ThrowBox, run script `install.py`.
 For now, that script only creates a *folder* named `REPO` in the root of the project directory.
