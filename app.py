@@ -25,6 +25,14 @@ for section in cp:
 def favicon():
 	return flask.send_file(os.path.join(app.root_path, 'static','favicon.ico'))
 
+@app.route("/robots.txt")
+def robots():
+	print(app.config["MAIN"]["allowrobots"])
+	if app.config["MAIN"]["allowrobots"].lower()=="false":
+		return "User-agent: *\nDisallow: /"
+	else:
+		flask.abort(404)
+
 @app.route("/")
 def index():
 	return flask.render_template("index.html")
